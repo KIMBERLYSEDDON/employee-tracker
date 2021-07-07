@@ -18,8 +18,10 @@ When the user is satisfied with their updates they may EXIT the app via the main
 
 Below is an example video of the finished application.
 
+https://drive.google.com/file/d/1X1JlwgCr2dxY7SHHFN-U-zf__9C5qGWk/view
 
-![screen record of project](images/note-taker.gif)
+
+![screen record of project](images/employee.gif)
 
 ## Credits 
 
