@@ -18,7 +18,6 @@ const options = [
             "View All Roles", 
             "View All Departments", 
             "Add Employee", 
-            // "Remove Employee", 
             "Update Employee Role", 
             "Add Role", 
             "Add Department",
@@ -27,7 +26,6 @@ const options = [
     }
 ]
 const viewEmployees = () => {
-    console.log('Selecting all employees...\n');
     connection.query('SELECT * FROM employee', (err, res) => {
       if (err) throw err;
       console.table(res);
@@ -35,7 +33,6 @@ const viewEmployees = () => {
     });
 };
 const viewRoles = () => {
-    console.log('Selecting all roles...\n');
     connection.query('SELECT * FROM role', (err, res) => {
       if (err) throw err;
       console.table(res);
@@ -43,7 +40,6 @@ const viewRoles = () => {
     });
 };
 const viewDepartments = () => {
-    console.log('Selecting all departments...\n');
     connection.query('SELECT * FROM department', (err, res) => {
       if (err) throw err;
       console.table(res);
@@ -54,7 +50,6 @@ const viewDepartments = () => {
 const addEmployee = () => {
     connection.query('SELECT * FROM department INNER JOIN role ON department.id = role.department_id', (err, data) => {
         if (err) throw err; 
-        console.log(data)
     inquirer
     .prompt([
       {
@@ -107,7 +102,6 @@ const addEmployee = () => {
 const addRole = () => {
   connection.query('SELECT DISTINCT * FROM department', (err, data) => {
       if (err) throw err; 
-      console.log(data)
   inquirer
   .prompt([
     {
@@ -147,7 +141,7 @@ const addRole = () => {
       },
       (err) => {
         if (err) throw err;
-        console.log('Your role was added successfully!');
+        console.log('New role was added successfully!');
         menuPrompt();
       }
     );
@@ -157,7 +151,6 @@ const addRole = () => {
 const addDepartment = () => {
   connection.query('SELECT * FROM department', (err, data) => {
       if (err) throw err; 
-      console.log(data)
   inquirer
   .prompt([
     {
@@ -174,7 +167,7 @@ const addDepartment = () => {
       },
       (err) => {
         if (err) throw err;
-        console.log('Your department was added successfully!');
+        console.log('New department was added successfully!');
         menuPrompt();
       }
     );
@@ -185,7 +178,6 @@ const addDepartment = () => {
 const updateEmployee = () => {
   connection.query(
     'SELECT employee.id, first_name, last_name, role.id, title FROM employee RIGHT JOIN role ON employee.role_id = role.id', (err, data) => {
-  console.log(data)
   inquirer
   .prompt([
     {
@@ -217,10 +209,8 @@ const updateEmployee = () => {
   ])
   .then((response) => {
     let empId = response.employee.split(' ');
-    console.log(empId[2])
-    
     let empRole = response.newRole.slice(-1);
-    console.log(empRole)
+
     connection.query(
       'UPDATE employee SET ? WHERE ?',
       [
@@ -241,31 +231,6 @@ const updateEmployee = () => {
 })
 };
 
-// const add = () => {
-//     inquirer
-//       .prompt([
-//         {
-//           name: 'selector',
-//           type: 'list',
-//           message: 'What would you like to add?',
-//           choices: [
-//               "Employee",
-//               "Role",
-//               "Department",
-//               "EXIT"
-//           ]}
-// ]).then((response) => {
-
-//     switch (response.selector) {
-//         case "Employee":
-            
-//             break;
-    
-//         default:
-//             break;
-//     }
-// })
-// }
 const menuPrompt = () => { 
     console.log("Welcome to the the Employee Tracker!");
     
