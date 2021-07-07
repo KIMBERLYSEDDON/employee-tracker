@@ -232,8 +232,7 @@ const updateEmployee = () => {
 };
 
 const menuPrompt = () => { 
-    console.log("Welcome to the the Employee Tracker!");
-    
+  console.log("MAIN MENU:")
     inquirer.prompt(options)
       .then((response) => {
           switch (response.menu) {
@@ -270,7 +269,7 @@ const menuPrompt = () => {
 
 connection.connect((err) => {
     if (err) throw err;
-    console.log(`connected as id ${connection.threadId}`);
+    console.log("Welcome to the the Employee Tracker!");
     menuPrompt();
 });
   
